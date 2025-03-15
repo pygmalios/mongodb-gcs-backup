@@ -1,8 +1,14 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/${REPO_NAME}:${_ENV_IMAGE_TAG}-${COMMIT_SHA}-${BUILD_ID}', '-t', 'eu.gcr.io/$PROJECT_ID/${REPO_NAME}:${_ENV_IMAGE_TAG}', '.']
+- name: gcr.io/cloud-builders/docker
+  args:
+  - build
+  - -t
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/kube/${REPO_NAME}:${_ENV_IMAGE_TAG}-${COMMIT_SHA}-${BUILD_ID}'
+  - -t
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/kube/${REPO_NAME}:${_ENV_IMAGE_TAG}'
+  - .
 images:
-- 'eu.gcr.io/$PROJECT_ID/${REPO_NAME}:${_ENV_IMAGE_TAG}-${COMMIT_SHA}-${BUILD_ID}'
-- 'eu.gcr.io/$PROJECT_ID/${REPO_NAME}:${_ENV_IMAGE_TAG}'
+- 'europe-west1-docker.pkg.dev/$PROJECT_ID/kube/${REPO_NAME}:${_ENV_IMAGE_TAG}-${COMMIT_SHA}-${BUILD_ID}'
+- 'europe-west1-docker.pkg.dev/$PROJECT_ID/kube/${REPO_NAME}:${_ENV_IMAGE_TAG}'
 substitutions:
   _ENV_IMAGE_TAG: test
